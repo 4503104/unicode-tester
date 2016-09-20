@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Unicode Tester</string>
+
+    <string name="button_clear">clear</string>
+    <string name="button_add">add</string>
+
+    <string name="label_code_point">Unicode Code Point</string>
+    <string name="label_java_char">Java Character</string>
+    <string name="label_utf8">UTF-8</string>
+    <string name="label_utf16_be">UTF-16 (Big Endian)</string>
+    <string name="label_utf16_le">UTF-16 (Little Endian)</string>
+    <string name="label_utf32_be">UTF-32 (Big Endian)</string>
+    <string name="label_utf32_le">UTF-32 (Little Endian)</string>
+
+    <string name="count_format_no_unit">%,d</string>
+    <string name="count_format_bytes">%,d bytes</string>
+
+</resources>
