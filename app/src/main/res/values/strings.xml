@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Unicode Tester</string>
 
+    <string name="menu_title_select">Select code point from the list.</string>
+    <string name="menu_title_input">Input code point directly.</string>
+
     <string name="hint_main_text">Please input.</string>
+
+    <string name="message_code_point">Please input code point.\n(0000 &#8211; 10FFFF)</string>
 
     <string name="button_clear">clear</string>
 
@@ -15,6 +20,8 @@
     <string name="label_utf_16le">UTF-16LE</string>
     <string name="label_utf_32be">UTF-32BE</string>
     <string name="label_utf_32le">UTF-32LE</string>
+
+    <string name="prefix_code_point">U+</string>
 
     <plurals name="size_format_code_point">
         <item quantity="one">(%d code point)</item>
