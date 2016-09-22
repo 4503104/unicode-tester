@@ -1,9 +1,11 @@
 package jp.gr.java_conf.shygoo.unicodetester;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wefika.flowlayout.FlowLayout;
@@ -62,8 +64,9 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
 
         View view;
         GroupViewHolder holder;
+        Context context = parent.getContext();
         if (convertView == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_expandable_list_item_1, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.analysis_result_label, parent, false);
             holder = new GroupViewHolder(view);
             view.setTag(holder);
         } else {
@@ -73,7 +76,9 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
 
         AnalysisType type = getGroup(groupPosition);
 
-        holder.label.setText(parent.getContext().getString(type.getLabel()));
+        holder.label.setText(context.getString(type.getLabel()));
+        int indicatorResId = isExpanded ? R.drawable.ic_expand_less_gray_24dp : R.drawable.ic_expand_more_gray_24dp;
+        holder.indicator.setImageResource(indicatorResId);
 
         return view;
     }
@@ -84,7 +89,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
         View view;
         ChildViewHolder holder;
         if (convertView == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.analysis_result, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.analysis_result_data, parent, false);
             holder = new ChildViewHolder(view);
             view.setTag(holder);
         } else {
@@ -111,52 +116,31 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
         }
 
         List<CharSequence> detailValues = null;
-        CharSequence sizeValue = null;
+        int size = 0;
         switch (type) {
-            case CODE_POINT: {
+            case CODE_POINT:
                 int[] codePoints = getCodePoints(targetText);
                 detailValues = formatCodePoints(codePoints);
-                sizeValue = formatSize(codePoints.length);
+                size = codePoints.length;
                 break;
-            }
-            case JAVA_CHAR: {
+            case JAVA_CHAR:
                 char[] chars = targetText.toCharArray();
                 detailValues = formatChars(chars);
-                sizeValue = formatSize(chars.length);
+                size = chars.length;
                 break;
-            }
-            case UTF8: {
-                Charset charset = Charset.forName("UTF-8");
+            case UTF_8:
+            case UTF_16BE:
+            case UTF_16LE:
+            case UTF_32BE:
+            case UTF_32LE:
+                Charset charset = Charset.forName(type.getCharsetName());
                 detailValues = formatBytes(targetText, charset);
-                sizeValue = formatByteSize(targetText.getBytes(charset).length);
+                size = targetText.getBytes(charset).length;
                 break;
-            }
-            case UTF16_BE: {
-                Charset charset = Charset.forName("UTF-16BE");
-                detailValues = formatBytes(targetText, charset);
-                sizeValue = formatByteSize(targetText.getBytes(charset).length);
-                break;
-            }
-            case UTF16_LE: {
-                Charset charset = Charset.forName("UTF-16LE");
-                detailValues = formatBytes(targetText, charset);
-                sizeValue = formatByteSize(targetText.getBytes(charset).length);
-                break;
-            }
-            case UTF32_BE: {
-                Charset charset = Charset.forName("UTF-32BE");
-                detailValues = formatBytes(targetText, charset);
-                sizeValue = formatByteSize(targetText.getBytes(charset).length);
-                break;
-            }
-            case UTF32_LE: {
-                Charset charset = Charset.forName("UTF-32LE");
-                detailValues = formatBytes(targetText, charset);
-                sizeValue = formatByteSize(targetText.getBytes(charset).length);
-                break;
-            }
         }
-        holder.update(detailValues, sizeValue);
+        Context context = holder.size.getContext();
+        CharSequence formattedSize = formatSize(context, type, size);
+        holder.update(detailValues, formattedSize);
     }
 
     private int[] getCodePoints(String targetText) {
@@ -199,20 +183,19 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
         return formattedValues;
     }
 
-    private CharSequence formatSize(int size) {
-        return String.format(Locale.getDefault(), "%,d", size);
-    }
-
-    private CharSequence formatByteSize(int size) {
-        return String.format(Locale.getDefault(), "%,d byte(s)", size);
+    private CharSequence formatSize(Context context, AnalysisType type, int size) {
+        return context.getResources().getQuantityString(type.getSizeFormat(), size, size);
     }
 
     static class GroupViewHolder {
 
-        @BindView(android.R.id.text1)
+        @BindView(R.id.label)
         TextView label;
 
-        public GroupViewHolder(View view) {
+        @BindView(R.id.indicator)
+        ImageView indicator;
+
+        GroupViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }
@@ -225,7 +208,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
         @BindView(R.id.data_size)
         TextView size;
 
-        public ChildViewHolder(View view) {
+        ChildViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
 
@@ -245,7 +228,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
             if (diff > 0) {
                 LayoutInflater inflater = LayoutInflater.from(detail.getContext());
                 for (int i = 0; i < diff; i++) {
-                    detail.addView(inflater.inflate(R.layout.data_item, detail, false));
+                    detail.addView(inflater.inflate(R.layout.data_balloon, detail, false));
                 }
             } else if (diff < 0) {
                 for (int i = diff; i < 0; i++) {

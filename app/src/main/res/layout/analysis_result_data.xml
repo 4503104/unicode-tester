@@ -2,8 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_with_divider"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingBottom="4dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="16dp">
 
     <com.wefika.flowlayout.FlowLayout
         android:id="@+id/data_detail"
@@ -14,8 +19,9 @@
         android:id="@+id/data_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="bottom|end"
         android:maxLines="1"
+        android:textColor="@color/analysis_result_data"
         android:textSize="12sp" />
 
 </LinearLayout>

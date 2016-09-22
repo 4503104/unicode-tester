@@ -3,6 +3,7 @@ package jp.gr.java_conf.shygoo.unicodetester;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -20,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.clear_button)
     View clearButton;
 
-    @BindView(R.id.add_button)
-    View addButton;
-
     @BindView(R.id.analysis_results)
     ExpandableListView analysisResults;
 
@@ -33,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        clearButton.setEnabled(false);
-        addButton.setEnabled(false);
         adapter = new AnalysisResultAdapter();
         analysisResults.setAdapter(adapter);
+        clearButton.setVisibility(View.INVISIBLE);
         mainText.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -51,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                clearButton.setVisibility(TextUtils.isEmpty(s) ? View.INVISIBLE : View.VISIBLE);
                 adapter.setTargetText(s.toString());
                 adapter.notifyDataSetChanged();
             }
@@ -60,10 +58,5 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.clear_button)
     public void clearText() {
         mainText.setText(null);
-    }
-
-    @OnClick(R.id.add_button)
-    public void showInputMethodDialog() {
-        //TODO
     }
 }
