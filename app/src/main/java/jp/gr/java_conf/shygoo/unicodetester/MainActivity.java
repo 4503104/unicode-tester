@@ -1,10 +1,14 @@
 package jp.gr.java_conf.shygoo.unicodetester;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -13,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CodePointInputDialog.InputListener {
 
     @BindView(R.id.main_text)
     EditText mainText;
@@ -55,8 +59,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.input:
+                requestInput();
+                return true;
+            case R.id.select:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     @OnClick(R.id.clear_button)
     public void clearText() {
         mainText.setText(null);
+    }
+
+    private void requestInput() {
+        DialogFragment fragment = CodePointInputDialog.newInstance();
+        fragment.show(getSupportFragmentManager(), "input");
+    }
+
+    @Override
+    public void onCodePointInput(int codePoint) {
+        mainText.append(String.valueOf(Character.toChars(codePoint)));
     }
 }
