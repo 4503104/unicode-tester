@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:id="@+id/glyph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_glyph"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minEms="1"
+        android:textColor="@android:color/black"
+        android:textSize="64sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/code_point_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_code_point" />
+
+        <TextView
+            android:id="@+id/code_point_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/category_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_category" />
+
+        <TextView
+            android:id="@+id/category_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/script_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_script" />
+
+        <TextView
+            android:id="@+id/script_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/block_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_block" />
+
+        <TextView
+            android:id="@+id/block_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/name_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_name" />
+
+        <TextView
+            android:id="@+id/name_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/directionality_label"
+            style="@style/CodePointDetailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_directionality" />
+
+        <TextView
+            android:id="@+id/directionality_value"
+            style="@style/CodePointDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/select"
-        android:title="@string/menu_title_select" />
+        android:icon="@drawable/ic_select"
+        android:title="@string/menu_title_select"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/input"
-        android:title="@string/menu_title_input" />
+        android:icon="@drawable/ic_input"
+        android:title="@string/menu_title_input"
+        app:showAsAction="ifRoom" />
 
 </menu>
