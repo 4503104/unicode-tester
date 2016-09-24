@@ -1,0 +1,39 @@
+<resources>
+
+    <string name="app_name">Unicode実験くん</string>
+
+    <string name="activity_title_code_point_list">コードポイント一覧</string>
+
+    <string name="menu_title_select">一覧からコードポイントを選択</string>
+    <string name="menu_title_input">コードポイントを直接入力</string>
+    <string name="menu_title_jump">指定位置までジャンプ</string>
+
+    <string name="hint_main_text">入力してください</string>
+
+    <string name="message_input_code_point">コードポイントを入力してください。\n（0000〜10FFFF）</string>
+    <string name="message_confirm_code_point">この文字でよろしいですか？</string>
+
+    <string name="button_clear">クリア</string>
+
+    <string name="label_main_text">解析対象：</string>
+    <string name="label_analysis_results">解析結果：</string>
+
+    <string name="label_code_point">コードポイント</string>
+    <string name="label_java_char">Java char型</string>
+    <string name="label_category">汎用カテゴリ</string>
+    <string name="label_script">文字スクリプト</string>
+    <string name="label_block">文字ブロック</string>
+    <string name="label_name">Unicode名</string>
+    <string name="label_directionality">方向性プロパティー</string>
+
+    <plurals name="size_format_code_point">
+        <item quantity="other">（%,d 個）</item>
+    </plurals>
+    <plurals name="size_format_java_char">
+        <item quantity="other">（%,d 個）</item>
+    </plurals>
+    <plurals name="size_format_byte">
+        <item quantity="other">（%,d バイト）</item>
+    </plurals>
+
+</resources>

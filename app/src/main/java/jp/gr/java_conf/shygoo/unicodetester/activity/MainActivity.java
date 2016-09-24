@@ -1,7 +1,7 @@
-package jp.gr.java_conf.shygoo.unicodetester;
+package jp.gr.java_conf.shygoo.unicodetester.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -16,6 +16,12 @@ import android.widget.ExpandableListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.gr.java_conf.shygoo.unicodetester.R;
+import jp.gr.java_conf.shygoo.unicodetester.adapter.AnalysisResultAdapter;
+import jp.gr.java_conf.shygoo.unicodetester.dialog.CodePointInputDialog;
+import jp.gr.java_conf.shygoo.unicodetester.util.CodePointUtil;
+
+import static jp.gr.java_conf.shygoo.unicodetester.activity.CodePointListActivity.EXTRA_NAME_CODE_POINT;
 
 public class MainActivity extends AppCompatActivity implements CodePointInputDialog.InputListener {
 
@@ -27,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
 
     @BindView(R.id.analysis_results)
     ExpandableListView analysisResults;
+
+    private static final int REQUEST_CODE_SELECT = 100;
+
+    private static final String REQUEST_TAG_INPUT = "input";
 
     private AnalysisResultAdapter adapter;
 
@@ -69,11 +79,11 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.select:
+                requestSelect();
+                return true;
             case R.id.input:
                 requestInput();
-                return true;
-            case R.id.select:
-                // TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -85,13 +95,31 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
         mainText.setText(null);
     }
 
+    private void requestSelect() {
+        Intent intent = new Intent(this, CodePointListActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_SELECT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_SELECT:
+                if (resultCode == RESULT_OK) {
+                    onCodePointInput(data.getIntExtra(EXTRA_NAME_CODE_POINT, 0));
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
     private void requestInput() {
-        DialogFragment fragment = CodePointInputDialog.newInstance();
-        fragment.show(getSupportFragmentManager(), "input");
+        CodePointInputDialog.newInstance().show(getSupportFragmentManager(), REQUEST_TAG_INPUT);
     }
 
     @Override
     public void onCodePointInput(int codePoint) {
-        mainText.append(String.valueOf(Character.toChars(codePoint)));
+        mainText.append(CodePointUtil.toString(codePoint));
     }
 }

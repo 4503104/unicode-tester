@@ -1,5 +1,6 @@
-package jp.gr.java_conf.shygoo.unicodetester;
+package jp.gr.java_conf.shygoo.unicodetester.model;
 
+import jp.gr.java_conf.shygoo.unicodetester.R;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

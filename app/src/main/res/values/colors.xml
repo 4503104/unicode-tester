@@ -6,4 +6,8 @@
 
     <color name="divider">#66000000</color>
     <color name="analysis_result_data">#4169E1</color>
+
+    <color name="code_point_item_bg_default">#FFFFFF</color>
+    <color name="code_point_item_bg_pressed">#C0C0C0</color>
+
 </resources>

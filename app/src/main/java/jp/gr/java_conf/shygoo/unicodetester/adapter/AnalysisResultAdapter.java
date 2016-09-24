@@ -1,4 +1,4 @@
-package jp.gr.java_conf.shygoo.unicodetester;
+package jp.gr.java_conf.shygoo.unicodetester.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,10 +13,13 @@ import com.wefika.flowlayout.FlowLayout;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.gr.java_conf.shygoo.unicodetester.MyApp;
+import jp.gr.java_conf.shygoo.unicodetester.R;
+import jp.gr.java_conf.shygoo.unicodetester.model.AnalysisType;
+import jp.gr.java_conf.shygoo.unicodetester.util.CodePointUtil;
 import lombok.Setter;
 
 public class AnalysisResultAdapter extends BaseExpandableListAdapter {
@@ -138,8 +141,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
                 size = targetText.getBytes(charset).length;
                 break;
         }
-        Context context = holder.size.getContext();
-        CharSequence formattedSize = formatSize(context, type, size);
+        CharSequence formattedSize = formatSize(type, size);
         holder.update(detailValues, formattedSize);
     }
 
@@ -155,7 +157,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
     private List<CharSequence> formatCodePoints(int[] codePoints) {
         List<CharSequence> formattedValues = new ArrayList<>();
         for (int codePoint : codePoints) {
-            formattedValues.add(String.format(Locale.getDefault(), "U+%04X", codePoint));
+            formattedValues.add(CodePointUtil.format(codePoint));
         }
         return formattedValues;
     }
@@ -163,7 +165,7 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
     private List<CharSequence> formatChars(char[] chars) {
         List<CharSequence> formattedValues = new ArrayList<>();
         for (char c : chars) {
-            formattedValues.add(String.format(Locale.getDefault(), "\\u%04X", (int) c));
+            formattedValues.add(String.format("\\u%04X", (int) c));
         }
         return formattedValues;
     }
@@ -176,15 +178,15 @@ public class AnalysisResultAdapter extends BaseExpandableListAdapter {
             byte[] bytes = str.getBytes(charset);
             StringBuilder sb = new StringBuilder();
             for (byte b : bytes) {
-                sb.append(String.format(Locale.getDefault(), " %02X", b));
+                sb.append(String.format(" %02X", b));
             }
             formattedValues.add(sb.substring(1));
         }
         return formattedValues;
     }
 
-    private CharSequence formatSize(Context context, AnalysisType type, int size) {
-        return context.getResources().getQuantityString(type.getSizeFormat(), size, size);
+    private CharSequence formatSize(AnalysisType type, int size) {
+        return MyApp.getInstance().getResources().getQuantityString(type.getSizeFormat(), size, size);
     }
 
     static class GroupViewHolder {

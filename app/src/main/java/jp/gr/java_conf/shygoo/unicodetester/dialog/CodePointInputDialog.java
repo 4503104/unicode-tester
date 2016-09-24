@@ -1,13 +1,14 @@
-package jp.gr.java_conf.shygoo.unicodetester;
+package jp.gr.java_conf.shygoo.unicodetester.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import butterknife.ButterKnife;
+import jp.gr.java_conf.shygoo.unicodetester.R;
+import jp.gr.java_conf.shygoo.unicodetester.util.CodePointUtil;
 
 public class CodePointInputDialog extends DialogFragment {
 
@@ -29,19 +32,21 @@ public class CodePointInputDialog extends DialogFragment {
         super.onAttach(context);
         if (getTargetFragment() instanceof InputListener) {
             inputListener = (InputListener) getTargetFragment();
-        } else if (getActivity() instanceof InputListener) {
+        } else if (context instanceof InputListener) {
             inputListener = (InputListener) getActivity();
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         // Use custom layout.
         Context context = getActivity();
+        @SuppressLint("InflateParams")
         View customView = LayoutInflater.from(context).inflate(R.layout.code_point_input, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setMessage(R.string.message_code_point)
+                .setMessage(R.string.message_input_code_point)
                 .setView(customView);
 
         // Set ok/cancel button.
@@ -79,11 +84,17 @@ public class CodePointInputDialog extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 AlertDialog dialog = (AlertDialog) getDialog();
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                positiveButton.setEnabled(!TextUtils.isEmpty(s));
+                positiveButton.setEnabled(CodePointUtil.isValidCodePoint(s));
             }
         });
 
         return dialog;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        inputListener = null;
     }
 
     public interface InputListener {
