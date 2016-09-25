@@ -2,6 +2,7 @@ package jp.gr.java_conf.shygoo.unicodetester.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +15,7 @@ import jp.gr.java_conf.shygoo.unicodetester.R;
 import jp.gr.java_conf.shygoo.unicodetester.adapter.CodePointListAdapter;
 import jp.gr.java_conf.shygoo.unicodetester.dialog.CodePointDetailDialog;
 import jp.gr.java_conf.shygoo.unicodetester.dialog.CodePointInputDialog;
+import jp.gr.java_conf.shygoo.unicodetester.util.SharedPreferencesUtil;
 
 public class CodePointListActivity extends AppCompatActivity implements CodePointListAdapter.ClickListener,
         CodePointDetailDialog.SelectListener, CodePointInputDialog.InputListener {
@@ -32,8 +34,12 @@ public class CodePointListActivity extends AppCompatActivity implements CodePoin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_point_list);
         ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         codePointList.setAdapter(new CodePointListAdapter());
+        codePointList.setSelection(SharedPreferencesUtil.loadScrollPosition());
     }
 
     @Override
@@ -78,5 +84,13 @@ public class CodePointListActivity extends AppCompatActivity implements CodePoin
         result.putExtra(EXTRA_NAME_CODE_POINT, codePoint);
         setResult(RESULT_OK, result);
         finish();
+    }
+
+    @Override
+    public void finish() {
+        if (codePointList != null) {
+            SharedPreferencesUtil.saveScrollPosition(codePointList.getFirstVisiblePosition());
+        }
+        super.finish();
     }
 }
