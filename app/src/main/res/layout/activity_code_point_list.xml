@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C0C0C0"
+    android:background="@color/divider"
     tools:context="jp.gr.java_conf.shygoo.unicodetester.activity.CodePointListActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -103,33 +103,11 @@
         <FrameLayout style="@style/ScrollButtonFrame">
 
             <ImageView
-                android:id="@+id/scroll_down_short"
+                android:id="@+id/scroll_to_bottom"
                 style="@style/ScrollButtonImage"
                 android:background="@drawable/bg_scroll_button"
-                android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
+                android:src="@drawable/ic_keyboard_tab_blue_24px_90" />
 
-        </FrameLayout>
-
-        <FrameLayout style="@style/ScrollButtonFrame">
-
-            <LinearLayout
-                android:id="@+id/scroll_down_middle"
-                style="@style/ScrollButtonImageFrame"
-                android:background="@drawable/bg_scroll_button">
-
-                <ImageView
-                    style="@style/ScrollButtonImage"
-                    android:layout_marginBottom="-16dp"
-                    android:layout_marginTop="-8dp"
-                    android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
-
-                <ImageView
-                    style="@style/ScrollButtonImage"
-                    android:layout_marginBottom="-8dp"
-                    android:layout_marginTop="-16dp"
-                    android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
-
-            </LinearLayout>
         </FrameLayout>
 
         <FrameLayout style="@style/ScrollButtonFrame">
@@ -160,11 +138,33 @@
 
         <FrameLayout style="@style/ScrollButtonFrame">
 
+            <LinearLayout
+                android:id="@+id/scroll_down_middle"
+                style="@style/ScrollButtonImageFrame"
+                android:background="@drawable/bg_scroll_button">
+
+                <ImageView
+                    style="@style/ScrollButtonImage"
+                    android:layout_marginBottom="-16dp"
+                    android:layout_marginTop="-8dp"
+                    android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
+
+                <ImageView
+                    style="@style/ScrollButtonImage"
+                    android:layout_marginBottom="-8dp"
+                    android:layout_marginTop="-16dp"
+                    android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout style="@style/ScrollButtonFrame">
+
             <ImageView
-                android:id="@+id/scroll_to_bottom"
+                android:id="@+id/scroll_down_short"
                 style="@style/ScrollButtonImage"
                 android:background="@drawable/bg_scroll_button"
-                android:src="@drawable/ic_keyboard_tab_blue_24px_90" />
+                android:src="@drawable/ic_keyboard_arrow_down_blue_24dp" />
 
         </FrameLayout>
 
