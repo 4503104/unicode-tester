@@ -21,6 +21,7 @@ import jp.gr.java_conf.shygoo.unicodetester.util.CodePointUtil;
 import jp.gr.java_conf.shygoo.unicodetester.util.SharedPreferencesUtil;
 import jp.gr.java_conf.shygoo.unicodetester.view.FooterLayout;
 import jp.gr.java_conf.shygoo.unicodetester.view.HeaderLayout;
+import jp.gr.java_conf.shygoo.unicodetester.view.SimpleGridDivider;
 
 public class CodePointListActivity extends AppCompatActivity implements CodePointListAdapter.ClickListener,
         CodePointDetailDialog.SelectListener, CodePointInputDialog.InputListener {
@@ -55,6 +56,7 @@ public class CodePointListActivity extends AppCompatActivity implements CodePoin
         }
         layoutManager = new GridLayoutManager(this, SPAN_COUNT);
         codePointList.setLayoutManager(layoutManager);
+        codePointList.addItemDecoration(new SimpleGridDivider(SPAN_COUNT, R.dimen.grid_divider));
         codePointList.setAdapter(new CodePointListAdapter());
         codePointList.scrollToPosition(SharedPreferencesUtil.loadScrollPosition());
     }
