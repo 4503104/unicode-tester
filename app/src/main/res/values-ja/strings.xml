@@ -6,6 +6,7 @@
 
     <string name="menu_title_select">一覧からコードポイントを選択</string>
     <string name="menu_title_input">コードポイントを直接入力</string>
+    <string name="menu_title_share">入力値を共有</string>
     <string name="menu_title_jump">指定位置までジャンプ</string>
 
     <string name="hint_main_text">入力してください</string>

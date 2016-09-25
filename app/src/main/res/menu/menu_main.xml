@@ -14,4 +14,10 @@
         android:title="@string/menu_title_input"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/menu_title_share"
+        app:showAsAction="ifRoom" />
+
 </menu>

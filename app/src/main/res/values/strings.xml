@@ -6,6 +6,7 @@
 
     <string name="menu_title_select">Select code point from the list</string>
     <string name="menu_title_input">Input code point directly</string>
+    <string name="menu_title_share">Share input text</string>
     <string name="menu_title_jump">Jump to the specified position</string>
 
     <string name="hint_main_text">Please input</string>
