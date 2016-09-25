@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3333ff</color>
-    <color name="colorPrimaryDark">#6666ff</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#0000CD</color>
+    <color name="colorPrimaryDark">#00008B</color>
+    <color name="colorAccent">#191970</color>
 
     <color name="divider">#66000000</color>
+
     <color name="analysis_result_data">#4169E1</color>
+
+    <color name="text_normal">#696969</color>
+    <color name="text_strong">#000000</color>
 
     <color name="code_point_item_bg_default">#FFFFFF</color>
     <color name="code_point_item_bg_pressed">#C0C0C0</color>

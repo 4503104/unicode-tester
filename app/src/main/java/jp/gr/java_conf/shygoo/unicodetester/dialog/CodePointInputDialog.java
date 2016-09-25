@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import jp.gr.java_conf.shygoo.unicodetester.R;
@@ -58,7 +60,7 @@ public class CodePointInputDialog extends DialogFragment {
                     return;
                 }
                 EditText input = ButterKnife.findById((AlertDialog) dialog, R.id.input);
-                inputListener.onCodePointInput(Integer.parseInt(input.getText().toString(), 16));
+                inputListener.onCodePointInput(CodePointUtil.parseCodePoint(input.getText()));
             }
         }).setNegativeButton(android.R.string.cancel, null);
 
@@ -84,7 +86,23 @@ public class CodePointInputDialog extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 AlertDialog dialog = (AlertDialog) getDialog();
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                positiveButton.setEnabled(CodePointUtil.isValidCodePoint(s));
+                View preview = ButterKnife.findById(dialog, R.id.preview);
+                if (CodePointUtil.isValidCodePoint(s)) {
+                    preview.setVisibility(View.VISIBLE);
+                    int codePoint = CodePointUtil.parseCodePoint(s);
+                    TextView glyph = ButterKnife.findById(dialog, R.id.glyph);
+                    glyph.setText(CodePointUtil.toString(codePoint));
+                    TextView name = ButterKnife.findById(dialog, R.id.name);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        name.setText(CodePointUtil.nameOf(codePoint));
+                    } else {
+                        name.setVisibility(View.GONE);
+                    }
+                    positiveButton.setEnabled(true);
+                } else {
+                    positiveButton.setEnabled(false);
+                    preview.setVisibility(View.GONE);
+                }
             }
         });
 

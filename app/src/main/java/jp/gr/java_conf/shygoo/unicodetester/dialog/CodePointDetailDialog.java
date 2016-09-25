@@ -72,8 +72,6 @@ public class CodePointDetailDialog extends DialogFragment {
         TextView scriptLabel = ButterKnife.findById(customView, R.id.script_label);
         TextView scriptValue = ButterKnife.findById(customView, R.id.script_value);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            scriptLabel.setVisibility(View.VISIBLE);
-            scriptValue.setVisibility(View.VISIBLE);
             scriptValue.setText(CodePointUtil.scriptOf(codePoint));
         } else {
             scriptLabel.setVisibility(View.GONE);
@@ -86,8 +84,6 @@ public class CodePointDetailDialog extends DialogFragment {
         TextView nameLabel = ButterKnife.findById(customView, R.id.name_label);
         TextView nameValue = ButterKnife.findById(customView, R.id.name_value);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            nameLabel.setVisibility(View.VISIBLE);
-            nameValue.setVisibility(View.VISIBLE);
             nameValue.setText(CodePointUtil.nameOf(codePoint));
         } else {
             nameLabel.setVisibility(View.GONE);
