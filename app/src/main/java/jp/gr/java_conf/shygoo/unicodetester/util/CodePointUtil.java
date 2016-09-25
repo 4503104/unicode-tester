@@ -7,7 +7,11 @@ import java.util.regex.Pattern;
 
 public class CodePointUtil {
 
-    public static final int COUNT = Character.MAX_CODE_POINT + 1;
+    public static final int MIN = Character.MIN_CODE_POINT;
+
+    public static final int MAX = Character.MAX_CODE_POINT;
+
+    public static final int COUNT = MAX + 1;
 
     private static final String FORMAT = "U+%04X";
 
@@ -179,5 +183,21 @@ public class CodePointUtil {
             default:
                 return "";
         }
+    }
+
+    public static int add(int baseCodePoint, int addend) {
+        int targetCodePoint = baseCodePoint + addend;
+        if (targetCodePoint > MAX) {
+            targetCodePoint = MAX;
+        }
+        return targetCodePoint;
+    }
+
+    public static int subtract(int baseCodePoint, int subtrahend) {
+        int targetCodePoint = baseCodePoint - subtrahend;
+        if (targetCodePoint < MIN) {
+            targetCodePoint = MIN;
+        }
+        return targetCodePoint;
     }
 }

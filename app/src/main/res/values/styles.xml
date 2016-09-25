@@ -56,4 +56,24 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="ScrollButtonFrame">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ScrollButtonImage">
+        <item name="android:layout_width">@dimen/scroll_button_size</item>
+        <item name="android:layout_height">@dimen/scroll_button_size</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="ScrollButtonImageFrame">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>
