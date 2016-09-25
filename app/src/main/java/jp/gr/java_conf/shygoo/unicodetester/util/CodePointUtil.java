@@ -17,10 +17,14 @@ public class CodePointUtil {
 
     public static boolean isValidCodePoint(CharSequence input) {
         if (PATTERN_CODE_POINT.matcher(input).matches()) {
-            int codePoint = Integer.parseInt(input.toString(), 16);
+            int codePoint = parseCodePoint(input);
             return codePoint <= Character.MAX_CODE_POINT;
         }
         return false;
+    }
+
+    public static int parseCodePoint(CharSequence text) {
+        return Integer.parseInt(text.toString(), 16);
     }
 
     public static String toString(int codePoint) {

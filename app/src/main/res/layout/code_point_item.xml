@@ -7,13 +7,9 @@
 
     <TextView
         android:id="@+id/glyph"
+        style="@style/Glyph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:maxLines="1"
-        android:minEms="1"
-        android:textColor="@android:color/black"
         android:textSize="32sp" />
 
     <TextView
@@ -23,7 +19,6 @@
         android:layout_gravity="center_horizontal"
         android:ellipsize="marquee"
         android:maxLines="1"
-        android:textColor="#696969"
         android:textSize="12sp" />
 
 </LinearLayout>
