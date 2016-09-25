@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
             case R.id.input:
                 requestInput();
                 return true;
+            case R.id.share:
+                shareText();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -121,5 +124,18 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
     @Override
     public void onCodePointInput(int codePoint) {
         mainText.append(CodePointUtil.toString(codePoint));
+    }
+
+    private void shareText() {
+        CharSequence shareText = mainText.getText();
+        if (TextUtils.isEmpty(shareText)) {
+            return;
+        }
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, shareText.toString());
+        intent.setType("text/plain");
+        startActivity(intent);
     }
 }
