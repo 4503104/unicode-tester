@@ -123,7 +123,19 @@ public class MainActivity extends AppCompatActivity implements CodePointInputDia
 
     @Override
     public void onCodePointInput(int codePoint) {
-        mainText.append(CodePointUtil.toString(codePoint));
+        String input = CodePointUtil.toString(codePoint);
+        int selectionStart = mainText.getSelectionStart();
+        if (selectionStart >= 0) {
+            int selectionEnd = mainText.getSelectionEnd();
+            int replaceStart = Math.min(selectionStart, selectionEnd);
+            int replaceEnd = Math.max(selectionStart, selectionEnd);
+            Editable currentValue = mainText.getText();
+            mainText.setText(currentValue.replace(replaceStart, replaceEnd, input));
+            mainText.setSelection(replaceStart + input.length());
+        } else {
+            mainText.append(input);
+            mainText.setSelection(mainText.getText().length());
+        }
     }
 
     private void shareText() {
