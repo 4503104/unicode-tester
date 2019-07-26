@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <TextView
+    <androidx.emoji.widget.EmojiEditText
         android:id="@+id/glyph"
         style="@style/Glyph"
         android:layout_width="wrap_content"

@@ -5,7 +5,7 @@
     android:background="@drawable/bg_code_point_item"
     android:orientation="vertical">
 
-    <TextView
+    <androidx.emoji.widget.EmojiEditText
         android:id="@+id/glyph"
         style="@style/Glyph"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ellipsize="marquee"
-        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="12sp" />
 
 </LinearLayout>
