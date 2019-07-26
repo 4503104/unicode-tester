@@ -1,7 +1,7 @@
 package jp.gr.java_conf.shygoo.unicodetester.util;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import java.util.regex.Pattern;
 

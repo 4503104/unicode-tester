@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -59,7 +59,7 @@ public class CodePointInputDialog extends DialogFragment {
                 if (inputListener == null) {
                     return;
                 }
-                EditText input = ButterKnife.findById((AlertDialog) dialog, R.id.input);
+                EditText input = customView.findViewById(R.id.input);
                 inputListener.onCodePointInput(CodePointUtil.parseCodePoint(input.getText()));
             }
         }).setNegativeButton(android.R.string.cancel, null);
@@ -72,7 +72,7 @@ public class CodePointInputDialog extends DialogFragment {
                 ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         });
-        EditText input = ButterKnife.findById(customView, R.id.input);
+        EditText input = customView.findViewById(R.id.input);
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,13 +86,13 @@ public class CodePointInputDialog extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 AlertDialog dialog = (AlertDialog) getDialog();
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                View preview = ButterKnife.findById(dialog, R.id.preview);
+                View preview = customView.findViewById(R.id.preview);
                 if (CodePointUtil.isValidCodePoint(s)) {
                     preview.setVisibility(View.VISIBLE);
                     int codePoint = CodePointUtil.parseCodePoint(s);
-                    TextView glyph = ButterKnife.findById(dialog, R.id.glyph);
+                    TextView glyph = customView.findViewById(R.id.glyph);
                     glyph.setText(CodePointUtil.toString(codePoint));
-                    TextView name = ButterKnife.findById(dialog, R.id.name);
+                    TextView name = customView.findViewById(R.id.name);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         name.setText(CodePointUtil.nameOf(codePoint));
                     } else {

@@ -7,9 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -60,17 +60,17 @@ public class CodePointDetailDialog extends DialogFragment {
         View customView = LayoutInflater.from(context).inflate(R.layout.code_point_detail, null);
 
         // Set codePoint info.
-        TextView glyph = ButterKnife.findById(customView, R.id.glyph);
+        TextView glyph = customView.findViewById(R.id.glyph);
         glyph.setText(CodePointUtil.toString(codePoint));
 
-        TextView codePointValue = ButterKnife.findById(customView, R.id.code_point_value);
+        TextView codePointValue = customView.findViewById(R.id.code_point_value);
         codePointValue.setText(CodePointUtil.formatLong(codePoint));
 
-        TextView categoryValue = ButterKnife.findById(customView, R.id.category_value);
+        TextView categoryValue = customView.findViewById(R.id.category_value);
         categoryValue.setText(CodePointUtil.categoryOf(codePoint));
 
-        TextView scriptLabel = ButterKnife.findById(customView, R.id.script_label);
-        TextView scriptValue = ButterKnife.findById(customView, R.id.script_value);
+        TextView scriptLabel = customView.findViewById(R.id.script_label);
+        TextView scriptValue = customView.findViewById(R.id.script_value);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             scriptValue.setText(CodePointUtil.scriptOf(codePoint));
         } else {
@@ -78,11 +78,11 @@ public class CodePointDetailDialog extends DialogFragment {
             scriptValue.setVisibility(View.GONE);
         }
 
-        TextView blockValue = ButterKnife.findById(customView, R.id.block_value);
+        TextView blockValue = customView.findViewById(R.id.block_value);
         blockValue.setText(CodePointUtil.blockOf(codePoint));
 
-        TextView nameLabel = ButterKnife.findById(customView, R.id.name_label);
-        TextView nameValue = ButterKnife.findById(customView, R.id.name_value);
+        TextView nameLabel = customView.findViewById(R.id.name_label);
+        TextView nameValue = customView.findViewById(R.id.name_value);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             nameValue.setText(CodePointUtil.nameOf(codePoint));
         } else {
@@ -90,7 +90,7 @@ public class CodePointDetailDialog extends DialogFragment {
             nameValue.setVisibility(View.GONE);
         }
 
-        TextView directionalityValue = ButterKnife.findById(customView, R.id.directionality_value);
+        TextView directionalityValue = customView.findViewById(R.id.directionality_value);
         directionalityValue.setText(CodePointUtil.directionalityOf(codePoint));
 
         // Create dialog.
